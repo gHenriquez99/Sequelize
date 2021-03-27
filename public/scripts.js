@@ -1,6 +1,6 @@
 async function handleData() {
-  const table = document.querySelector('.dataTable');
-  const headerRow = document.querySelector('.table-header-row');
+  const table = document.querySelector('.table');
+  const headerRow = document.querySelector('.tblRow');
 
   const diningHallRequest = await fetch('/api/dining');
   const diningHallData = await diningHallRequest.json();
@@ -12,7 +12,6 @@ async function handleData() {
 
   keys.forEach((item) => {
     const thElem = document.createElement('th');
-    thElem.classList.add('table-data');
     thElem.innerText = item;
     headerRow.append(thElem);
   });
