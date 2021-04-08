@@ -9,6 +9,18 @@ const router = express.Router();
 /// /////////////////////////////////
 /// ////Dining Hall Endpoints////////
 /// /////////////////////////////////
+router.route('/wholeMeals').get(async (req, res) => {
+  try {
+    const meals = await db.meals.findAll();
+    const macros = await db.macros.findall();
+    
+  } 
+  catch (err) {
+    console.error(err);
+    res.error('Server error');
+  }
+});
+
 router.get('/dining', async (req, res) => {
   try {
     const halls = await db.DiningHall.findAll();
@@ -207,7 +219,6 @@ router.get('/restrictions/:restriction_id', async (req, res) => {
     res.json(restrictions);
   } catch (err) {
     console.error(err);
-    gi;
     res.error('Server error');
   }
 });

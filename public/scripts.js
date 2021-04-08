@@ -1,4 +1,13 @@
-async function handleData() {
+async function handleDataChart() {
+  const mealRequest = await fetch('/api/meals');
+  const mealData = await mealRequest.json();
+  const macroRequest = await fetch('/api/macros');
+  const macroData = await macroRequest.json();
+  console.log(mealData);
+  console.log(macroData);
+}
+
+async function handleDataTable() {
   const table = document.querySelector('.table');
   const headerRow = document.querySelector('.tblRow');
 
@@ -35,7 +44,8 @@ async function handleData() {
 
 async function windowActions() {
   console.log('Window has been loaded');
-  handleData();
+  handleDataTable();
+  handleDataChart();
 }
 
 window.onload = windowActions;
