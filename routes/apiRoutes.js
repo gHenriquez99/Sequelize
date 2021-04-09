@@ -9,13 +9,20 @@ const router = express.Router();
 /// /////////////////////////////////
 /// ////Dining Hall Endpoints////////
 /// /////////////////////////////////
-router.route('/wholeMeals').get(async (req, res) => {
+router.route('/wholeMeal').get(async (req, res) => {
   try {
-    const meals = await db.meals.findAll();
-    const macros = await db.macros.findall();
-    
-  } 
-  catch (err) {
+    const meals = await db.Meals.findAll();
+    const macros = await db.Macros.findAll();
+
+    const wholeMeals = meals.map((meal) => {
+      const macroEntry = macros.find((macro) => macro.macro_id === meal.meal_id);
+      return {
+        ...meal.dataValues,
+        ...macroEntry.dataValues
+      };
+    });
+    res.json({data: wholeMeals});
+  } catch (err) {
     console.error(err);
     res.error('Server error');
   }
